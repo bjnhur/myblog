@@ -1,0 +1,39 @@
+{{ define "main" -}}
+<!-- 폴더내 리스트를 보여줄때 즉, /posts/ 와 같은 패스에서 리스트를 보여줄 때 사용. section.html 이거 있으면 list.html 이 필요없어짐 -->
+<main aria-role="main">
+<div>
+  <h1>{{ .Title }}</h1>
+</div>
+<div>
+<!-- 폴더의 인덱스 파일 _index.md 내용은 여기서 표기됩니다 -->
+  {{ .Content -}}
+</div>
+<!-- 폴더내 파일 리스트를 보여주는 내용입니다 -->
+<ul>
+  {{ range .Paginator.Pages -}}
+  <li>{{ with .Date }}{{ .Format "2006-01-02" }} - {{ end }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ with .Description }}: {{ . }}{{ end }}</li>
+  <div class="article-info">
+      {{ if .Params.date }}
+          <div class="article-date">{{ .Params.date.Format "2006-01-02" }}</div>
+      {{ end }}
+      <div class="article-taxonomies">
+          {{ if .Params.categories }}
+              <div class="article-categories">
+                  {{ range .Params.categories }}
+                      <a href="{{ "/categories/" | relURL }}{{ . | urlize }}">#{{ . }}</a>
+                  {{ end }}
+              </div>
+          {{ end }}
+          {{ if .Params.tags }}
+              <div class="article-tags">
+                  {{ range .Params.tags }}
+                      <a href="{{ "/tags/" | relURL }}{{ . | urlize }}">#{{ . }}</a>
+                  {{ end }}
+              </div>
+          {{ end }}
+      </div>
+  </div>
+  {{ end -}}
+</ul>
+</main>
+{{ end }}

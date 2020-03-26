@@ -1,0 +1,23 @@
+{{ define "main" }}
+<!-- /tags/tagitem/ 태그 하나 선택하면 나오는 하나의 태그 상세 페이지 -->
+  <h1>Tagged "{{ .Data.Term }}"</h1>
+  {{range .Pages}}
+    <!-- Display the posts with the tag -->
+    <article>
+            <h2>
+                <a href="{{ .Permalink }}">
+                    {{ .Title }}
+                </a>
+            </h2>
+            <div>
+                <p>
+                {{ .Summary }}
+                </p>
+            </div>
+            <div class="post-footer">
+            <time>{{ .Date.Format "January 2, 2006" }}</time>
+            </div>
+    </article>
+    {{ end }}
+
+{{ end }}

@@ -1,0 +1,24 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no"/>
+    {{ with .Site.Params.googleSiteVerification -}}
+    <meta name="google-site-verification" content="{{ . }}">
+    {{ end -}}
+    {{ with .Site.Params.author -}}
+    <meta name="author" content="{{ . }}">
+    {{ end -}}
+    {{ with .Site.Params.description -}}
+    <meta name="description" content="{{ . }}">
+    {{ end -}}
+    {{ with .Site.Params.keywords -}}
+    <meta name="keywords" content="{{ . }}">
+    {{ end -}}
+    
+    <title>{{ .Site.Title }}</title>
+    {{ with .OutputFormats.Get "RSS" }}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ end }}
+    {{ template "_internal/google_analytics.html" . }}
+</head>

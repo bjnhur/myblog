@@ -1,0 +1,10 @@
+{{ define "main" }}
+<!-- /tags/ 태그 선택하면 나오는 페이지 -->
+<h1>{{ .Title }}</h1>
+<ul>
+    {{ range .Data.Terms.Alphabetical }}
+        <li><a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a> {{ .Count }}</li>
+    {{ end }}
+</ul>
+<div class="page-footer"></div>
+{{end}}
